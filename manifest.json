@@ -1,0 +1,26 @@
+{
+	"manifest_version": 2,
+
+	"name": "Basic Extension To Autofill Form",
+	"description": "This extension fills up the form automatically by fetching its value from the database",
+	"version": "1.0",
+
+	"browser_action": {
+		"default_icon": "icon.png",
+		"default_popup": "popup.html",
+		"default_title": "Click here!"
+	},
+	"background": {
+		"scripts": ["background.js"]
+	},
+	"permissions": ["activeTab", "http://*/*", "https://*/*", "tabs"],
+
+	"externally_connectable": {
+		"matches": [
+			"https://nisarg0.github.io/AutoFillCheck1/*",
+			"https://cocky-wing-601a72.netlify.app/*",
+			"*://my.localhost/*/*",
+			"https://autofill-vault.herokuapp.com/*"
+		]
+	}
+}
