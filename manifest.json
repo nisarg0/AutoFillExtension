@@ -16,11 +16,6 @@
 	"permissions": ["activeTab", "http://*/*", "https://*/*", "tabs"],
 
 	"externally_connectable": {
-		"matches": [
-			"https://nisarg0.github.io/AutoFillCheck1/*",
-			"https://cocky-wing-601a72.netlify.app/*",
-			"*://my.localhost/*/*",
-			"https://autofill-vault.herokuapp.com/*"
-		]
+		"matches": ["https://cocky-wing-601a72.netlify.app/*"]
 	}
 }

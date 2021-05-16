@@ -1,24 +1,36 @@
-// const username = "nisarg@gmail.com";
-// const password = "12345678";
-
-// const username_field_name = "username";
-// const password_field_name = "user_pass";
-
+// Sending a messege from popup file to background with verification code(Handshake).
 chrome.runtime.sendMessage({ data: "Handshake" });
-chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
-	data = message.data;
-	console.log(data);
 
+// If verification is successful then background will send the data to poopup
+chrome.runtime.onMessage.addListener(async function (
+	message,
+	sender,
+	sendResponse
+) {
+	data = message.data;
+
+	// To check if we are populating the fields on proper site.
+	// var query = { active: true, currentWindow: true };
+	// chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+	// 	var currentTab = tabs[0];
+
+	// 	// User is on current tab.
+	// 	if (data.site !== currentTab.url) {
+	// 		console.log("Invalid operation");
+	// 		return false;
+	// 	}
+	// });
+
+	// Fill username field
 	chrome.tabs.executeScript(null, {
 		code: `document.getElementById('${data.userNameFieldName}').value = '${data.username}'`,
 	});
+
+	// Fill password field
 	chrome.tabs.executeScript(null, {
 		code: `document.getElementById('${data.passwordFieldName}').value = '${data.password}'`,
 	});
+	console.log("Successfully filled the fields");
 
-	return true;
+	sendResponse({ success: "success" });
 });
-
-// document.addEventListener("DOMContentLoaded", function () {
-
-// });

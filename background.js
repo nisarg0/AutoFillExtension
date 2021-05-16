@@ -1,6 +1,7 @@
 console.log("background is running...");
 
 var secretMessage;
+
 chrome.runtime.onMessageExternal.addListener(function (
 	Message,
 	sender,
@@ -8,19 +9,20 @@ chrome.runtime.onMessageExternal.addListener(function (
 ) {
 	console.log("Message recieved");
 	var action_url = Message.site;
-	console.log(Message);
+
 	secretMessage = Message;
+
+	// Open new tab with given url/
 	chrome.tabs.create({ url: action_url });
 	console.log("new tab opened");
 
-	console.log("msg sent from background");
 	sendResponse({ success: "success" });
-	return true;
 });
 
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
-	//alert(message.data);
+	//  If the request we recieved from popup is with correct identifier only then we send mssg
 	if (message.data === "Handshake") {
+		console.log("msg sent from background");
 		chrome.runtime.sendMessage({ data: secretMessage });
 	}
 
