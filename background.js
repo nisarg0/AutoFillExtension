@@ -19,12 +19,17 @@ chrome.runtime.onMessageExternal.addListener(function (
 	sendResponse({ success: "success" });
 });
 
-chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
-	//  If the request we recieved from popup is with correct identifier only then we send mssg
-	if (message.data === "Handshake") {
-		console.log("msg sent from background");
-		chrome.runtime.sendMessage({ data: secretMessage });
+chrome.runtime.onMessage.addListener(async function (
+	message,
+	sender,
+	sendResponse
+) {
+	// If current tab url is the one which has to signin form to fill.
+	if (message.data === secretMessage.site) {
+		// console.log("msg sent from background");
+		chrome.runtime.sendMessage({ data: secretMessage }, (Response) => {
+			console.log(Response);
+		});
 	}
-
-	return true;
+	sendResponse({ success: "Request received" });
 });

@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 
-	"name": "Basic Extension To Autofill Form",
+	"name": "Basic trial extension for autofill",
 	"description": "This extension fills up the form automatically by fetching its value from the database",
 	"version": "1.0",
 
