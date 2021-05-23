@@ -8,7 +8,7 @@ chrome.runtime.onMessageExternal.addListener(
 	(Message, sender, sendResponse) => {
 		console.log("Message recieved");
 		secretMessage = Message;
-
+		console.log(Message);
 		// Open new tab with given url/
 		chrome.tabs.create({ url: Message.url });
 		console.log("new tab opened");
