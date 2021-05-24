@@ -16,6 +16,9 @@
 	"permissions": ["activeTab", "http://*/*", "https://*/*", "tabs"],
 
 	"externally_connectable": {
-		"matches": ["https://cocky-wing-601a72.netlify.app/*"]
+		"matches": [
+			"https://cocky-wing-601a72.netlify.app/*",
+			"https://nisarg0.github.io/site-mimc/*"
+		]
 	}
 }
