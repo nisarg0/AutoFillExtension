@@ -11,16 +11,12 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
 
 	// Fill username field
 	chrome.tabs.executeScript(null, {
-		code: `document.getElementById('${
-			data.userNameFieldName
-		}').value = '${atob(data.username)}'`,
+		code: `document.getElementById('${data.userNameFieldName}').value = '${data.username}'`,
 	});
 
 	// Fill password field
 	chrome.tabs.executeScript(null, {
-		code: `document.getElementById('${
-			data.passwordFieldName
-		}').value = '${atob(data.password)}'`,
+		code: `document.getElementById('${data.passwordFieldName}').value = '${data.password}'`,
 	});
 
 	sendResponse({ success: "success" });

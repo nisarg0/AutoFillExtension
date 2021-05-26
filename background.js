@@ -1,16 +1,19 @@
 console.log("background is running...");
 
 // Data is encrypted inside this object
-var secretMessage;
+var encodedMessage;
 
 // Listens for even from casdashboard website
 chrome.runtime.onMessageExternal.addListener(
 	(Message, sender, sendResponse) => {
 		console.log("Message recieved");
-		secretMessage = Message;
+		encodedMessage = Message;
 		console.log(Message);
 		// Open new tab with given url/
-		chrome.tabs.create({ url: Message.url });
+		var decodedMsg = atob(Message);
+		var secretMsg = JSON.parse(decodedMsg);
+
+		chrome.tabs.create({ url: secretMsg.url });
 		console.log("new tab opened");
 
 		sendResponse({ success: "success" });
@@ -20,9 +23,11 @@ chrome.runtime.onMessageExternal.addListener(
 // Message passed with website url
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 	// If current tab url is the one which has to signin form to fill.
-	if (message.data === secretMessage.url) {
+	var decodedMsg = atob(encodedMessage);
+	var secretMsg = JSON.parse(decodedMsg);
+	if (message.data === secretMsg.url) {
 		// console.log("msg sent from background");
-		chrome.runtime.sendMessage({ data: secretMessage }, (Response) => {
+		chrome.runtime.sendMessage({ data: secretMsg }, (Response) => {
 			console.log(Response);
 		});
 	} else {
