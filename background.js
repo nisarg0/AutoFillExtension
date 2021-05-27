@@ -5,19 +5,17 @@ var encodedMessage;
 // Listens for even from casdashboard website
 chrome.runtime.onMessageExternal.addListener(
 	async (Message, sender, sendResponse) => {
-		console.log("0 Message recieved");
-		console.log("1" + Message);
-
 		encodedMessage = Message;
+
 		decodedMsg = await decryptLevel1(Message);
 
+		// Opens new tab
 		chrome.tabs.create({ url: decodedMsg.url });
-		console.log("3 new tab opened");
-
 		sendResponse({ success: "success" });
 	}
 );
 
+// Added a base-64 decoding
 async function decryptLevel1(Msg) {
 	var decoded = atob(Msg);
 	return await JSON.parse(decoded);
